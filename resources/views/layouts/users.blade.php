@@ -33,6 +33,9 @@
                         <li class=" nav-item">
                             <a href="{{ route('home') }}" class=" nav-link">Home</a>
                         </li>
+                        <li class=" nav-item">
+                            <a href="{{ route('articles.index') }}" class=" nav-link">Articles</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -57,6 +60,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a href="{{ route('home') }}" class="dropdown-item">Home</a>
+                                    <a href="{{ route('users.profile') }}" class="dropdown-item">Profile</a>
+                                    <a href="{{ route('users.setting') }}" class="dropdown-item">Settings</a>
+                                    <div class=" dropdown-divider">
+
+                                    </div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -74,7 +83,7 @@
             </div>
         </nav>
 
-        <main class="py-3 container-fluid">
+        <main class="py-3 container">
             @yield('content')
         </main>
     </div>

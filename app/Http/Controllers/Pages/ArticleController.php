@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Pages;
 
-use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ArticleController extends Controller
 {
@@ -13,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return view('articles.index');
     }
 
     /**
@@ -21,7 +24,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -29,7 +32,30 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'title' => ['required','string','max:200'],
+            'body' => ['required','string','max:3000'],
+            'image' => ['max:2048'],
+        ]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = $file->getClientOriginalName();
+            $path = $request->file('image')->storeAs('images',$filename,'public');
+        } else {
+            $filename = "noimage";
+        }
+
+        DB::table('articles')
+            ->insert([
+                'title' => $request->input('title'),
+                'body' => $request->input('body'),
+                'image' => $filename,
+                'user_id' => Auth::user()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        return redirect()->route('articles.index');
+
     }
 
     /**
@@ -37,7 +63,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show',[
+            'article' => $article,
+        ]);
     }
 
     /**
@@ -45,7 +73,9 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.edit',[
+            'article' => $article,
+        ]);
     }
 
     /**
@@ -53,7 +83,30 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $this->validate($request,[
+            'title' => ['required','string','max:200'],
+            'body' => ['required','string','max:3000'],
+            'image' => ['max:2048'],
+        ]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            if (File::exists('storage/images/'.$article->image)) {
+                File::delete('storage/images/'.$article->image);
+            }
+            $filename = $file->getClientOriginalName();
+            $path = $request->file('image')->storeAs('images',$filename,'public');
+        } else {
+            $filename = "noimage";
+        }
+          DB::table('articles')
+            ->insert([
+                'title' => $request->input('title'),
+                'body' => $request->input('body'),
+                'image' => $filename,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        return redirect()->route('articles.index');
     }
 
     /**
@@ -61,6 +114,11 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        if (Auth::user()->roles === 'admin') {
+            $article->delete();
+            return back();
+        }else{
+            return back();
+        }
     }
 }

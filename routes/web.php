@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Pages\PagesController;
 use App\Http\Controllers\Admins\AdminsController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Pages\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +39,11 @@ Route::prefix('admins')->group(function() {
 Route::prefix('users')->group(function() {
     Route::controller(HomeController::class)->group(fn() =>[
         Route::get('home','index')->name('home'),
+        Route::get('profile','profile')->name('users.profile'),
+        Route::get('setting','setting')->name('users.setting'),
     ]);
+    Route::resource('articles', ArticleController::class);
 });
 Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
