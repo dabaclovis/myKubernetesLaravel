@@ -1,12 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Pages\PagesController;
-use App\Http\Controllers\Admins\AdminsController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Pages\ArticleController;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,31 +14,10 @@ use App\Http\Controllers\Pages\ArticleController;
 |
 */
 
-Route::controller(PagesController::class)->group(function(){
-    Route::get('/','index')->name('pages.index');
-    Route::get('about','about')->name('pages.about');
-    Route::get('resume','resume')->name('pages.resume');
-});
-
-Route::prefix('authenticator')->group(fn() => [
-    Route::post('logination', [LoginController::class,'logination'])->name('gateman'),
-    Route::post('registration', [RegisterController::class,'HandledRegistration'])->name('users.registration'),
-]);
-
-Route::prefix('admins')->group(function() {
-    Route::controller(AdminsController::class)->group(fn() =>[
-        Route::get('dashboard','index')->name('admins.index'),
-    ]);
-});
-
-Route::prefix('users')->group(function() {
-    Route::controller(HomeController::class)->group(fn() =>[
-        Route::get('home','index')->name('home'),
-        Route::get('profile','profile')->name('users.profile'),
-        Route::get('setting','setting')->name('users.setting'),
-    ]);
-    Route::resource('articles', ArticleController::class);
-});
+require __DIR__. "/master/admin.php";
+require __DIR__. "/master/user.php";
+require __DIR__. "/master/page.php";
+require __DIR__. "/master/login.php";
 Auth::routes();
 
 

@@ -6,6 +6,7 @@ use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
@@ -16,7 +17,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('articles.index');
+        return view('articles.index',[
+            'numb' => Article::count(),
+            $user_id = Auth::user()->id,
+            $user = User::find($user_id),
+            'articles' => $user->articles,
+        ]);
     }
 
     /**
