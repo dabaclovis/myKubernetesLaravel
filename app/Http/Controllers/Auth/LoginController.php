@@ -52,9 +52,11 @@ class LoginController extends Controller
         if(Auth::attempt(['email' => Str::lower($request->input('email')), 'password' => $request->input('password')]))
         {
             $request->session()->regenerate();
+            
             if(Auth::user()->roles === 'user')
             {
                 return redirect()->route('home');
+
             }else if(Auth::user()->roles === 'admin')
             {
                 return redirect()->route('admins.index');

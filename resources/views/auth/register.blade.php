@@ -12,7 +12,7 @@
                         @csrf
 
                         <div class="w3-row w3-section">
-                            <div id="mands" class="w3-col w3-center">
+                            <div id="mands" class="w3-col w3-xlarge w3-center">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </div>
                             <div class="w3-rest">
@@ -27,7 +27,7 @@
                         </div>
 
                         <div class="w3-row w3-section">
-                            <div id="mands" class="w3-col w3-center">
+                            <div id="mands" class="w3-col w3-xlarge w3-center">
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
                             </div>
                             <div class="w3-rest">
@@ -42,7 +42,7 @@
                         </div>
 
                         <div class="w3-row w3-section">
-                            <div id="mands" class="w3-col w3-center">
+                            <div id="mands" class="w3-col w3-xlarge w3-center">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
                             </div>
                             <div class="w3-rest">
@@ -57,7 +57,7 @@
                         </div>
 
                         <div class="w3-row w3-section">
-                            <div id="mands" class="w3-col w3-center">
+                            <div id="mands" class="w3-col w3-xlarge w3-center">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
                             </div>
                             <div class="w3-rest">

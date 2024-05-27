@@ -1,7 +1,7 @@
 @extends('layouts.users')
 
 @section('content')
-        <div class="card">
+        <div class="card border-0">
             @if ($article->image !== 'noimage')
             <img class="card-img-top" src="{{ asset('storage/images/'.$article->image) }}" alt="">
             @endif
