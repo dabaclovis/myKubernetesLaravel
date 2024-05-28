@@ -11,6 +11,13 @@
             </div>
         </div>
         @endif
+    {{-- display name  --}}
+        {{-- <div class=" w3-panel">
+           <div><strong>{{ Str::ucfirst($user->fname) }}, {{ Str::ucfirst($user->lname) }}</strong></div>
+           <div><strong>{{ Str::lower($user->email) }}</strong></div>
+           <div><strong>{{ Str::ucfirst($user->roles) }}</strong></div>
+       </div> --}}
+       {{-- form upload  --}}
        <div class="w3-container w3-panel w3-card-4 pt-2">
         <form action="{{ route('uploadavatar') }}" method="post" enctype="multipart/form-data">
             @csrf

@@ -104,8 +104,7 @@ class ArticleController extends Controller
         } else {
             $filename = "noimage";
         }
-          DB::table('articles')
-            ->insert([
+          $article->update([
                 'title' => $request->input('title'),
                 'body' => $request->input('body'),
                 'image' => $filename,
@@ -120,7 +119,7 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        if (Auth::user()->roles === 'admin') {
+        if (Auth::user()->roles === 'admin' || Auth::user()->roles ==='user') {
             $article->delete();
             return back();
         }else{

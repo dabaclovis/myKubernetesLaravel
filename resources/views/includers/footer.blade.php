@@ -14,6 +14,7 @@
         $("#accord").accordion({
             callapsible:true,
             active: 0,
+            heightStyle:'content',
         });
     });
 </script>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Pages\StudentsController;
 
 
 /*
@@ -19,5 +20,5 @@ require __DIR__. "/master/user.php";
 require __DIR__. "/master/page.php";
 require __DIR__. "/master/login.php";
 Auth::routes();
-
+Route::resource('students', StudentsController::class);
 

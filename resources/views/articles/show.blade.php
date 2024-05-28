@@ -13,7 +13,12 @@
                 </small>
             </div>
         </div>
-        <a href="{{ route('articles.index') }}" class=" btn btn-secondary mt-2">
-            <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
-        </a>
+        <div class=" card-footer border-0 d-flex justify-content-between">
+            <a href="{{ route('articles.index') }}" class=" btn btn-secondary mt-2">
+                <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+            </a>
+            <a href="{{ route('articles.edit',$article->id) }}" class=" btn btn-secondary mt-2">
+                <i class="fa fa-edit" aria-hidden="true"></i>
+            </a>
+        </div>
 @endsection

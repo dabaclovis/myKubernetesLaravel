@@ -58,7 +58,7 @@ class ContactsController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        
     }
 
     /**

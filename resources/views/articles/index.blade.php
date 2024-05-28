@@ -20,6 +20,11 @@
                 </div>
                 <p class="mb-1">{{ Str::limit(Str::ucfirst($article->body)),150, '...' }}</p>
                 <small>written by {{ $article->user->fname }}</small>
+                <form action="{{ route('articles.destroy',$article->id) }}" method="post">
+                    @csrf
+                    @method("DELETE")
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </form>
             </a>
         </div>
         @endforeach
